@@ -1,6 +1,5 @@
 from django.db import models
 from datetime import date
-
 from django.urls import reverse
 
 
@@ -122,7 +121,12 @@ class Rating(models.Model):
     """Рейтинг"""
     ip = models.CharField("IP адрес", max_length=15)
     star = models.ForeignKey(RatingStar, on_delete=models.CASCADE, verbose_name="звезда")
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name="фильм", related_name="ratings")
+    movie = models.ForeignKey(
+        Movie,
+        on_delete=models.CASCADE,
+        verbose_name="фильм",
+        related_name="ratings"
+    )
 
     def __str__(self):
         return f"{self.star} - {self.movie}"
@@ -140,7 +144,7 @@ class Review(models.Model):
     parent = models.ForeignKey(
         'self', verbose_name="Родитель", on_delete=models.SET_NULL, blank=True, null=True, related_name="children"
     )
-    movie = models.ForeignKey(Movie, verbose_name="фильм", on_delete=models.CASCADE, related_name="reviews") # relate name поле которое позволяет нам обратиться из таблицы movie к нашем reviews
+    movie = models.ForeignKey(Movie, verbose_name="фильм", on_delete=models.CASCADE, related_name="reviews")
 
     def __str__(self):
         return f"{self.name} - {self.movie}"
