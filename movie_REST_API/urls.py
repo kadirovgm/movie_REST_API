@@ -22,7 +22,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),  # url для работы с djangorestframework, чтобы мы могли проверять и тестировать наши АПИ через веб-интерфейс
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('api/v1/', include('movies.urls'))
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
+    path('auth/', include('djoser.urls.jwt')),
+    path('api/v1/', include('movies.urls')),
 ]
 
 if settings.DEBUG:
