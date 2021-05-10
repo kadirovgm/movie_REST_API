@@ -19,7 +19,7 @@ class MovieListView(generics.ListAPIView):
     serializer_class = MovieListSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = MovieFilter
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]  # права доступа по токену
 
     def get_queryset(self):
         movies = Movie.objects.filter(draft=False).annotate(
