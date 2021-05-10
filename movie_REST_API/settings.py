@@ -221,7 +221,7 @@ CKEDITOR_CONFIGS = {
 
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = '7851039'
-SOCIAL_AUTH_VK_OAUTH2_SECRET = 'NnV8JMR4MaengXZq54yr'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = '' ############################################## from VK app
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
@@ -248,7 +248,7 @@ REST_FRAMEWORK = {
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'kadirovgm.work@gmail.com'
-EMAIL_HOST_PASSWORD = 'cinGGetline998/'
+EMAIL_HOST_PASSWORD = '' ############################################ from work@gmail
 EMAIL_PORT = 587
 
 
