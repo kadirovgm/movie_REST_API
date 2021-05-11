@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'social_django',
     'rest_framework_social_oauth2',
 
+    'corsheaders',
     'drf_yasg',
     'movies',
 
@@ -57,6 +58,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -151,6 +153,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'  # создали url для хранения статических изображений
 MEDIA_ROOT = BASE_DIR / 'media'  # создали ссылку на BASE_DIR
 
+
+# Каким доменам мы хотим давать доступ:
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:8080",
+    "http://127.0.0.1:8000"
+]
+
+
+
+
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CKEDITOR_CONFIGS = {
@@ -221,7 +233,7 @@ CKEDITOR_CONFIGS = {
 
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = '7851039'
-SOCIAL_AUTH_VK_OAUTH2_SECRET = '' ############################################## from VK app
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'NnV8JMR4MaengXZq54yr' ############################################## from VK app
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
@@ -240,6 +252,8 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 1
 
 }
 
@@ -248,7 +262,7 @@ REST_FRAMEWORK = {
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'kadirovgm.work@gmail.com'
-EMAIL_HOST_PASSWORD = '' ############################################ from work@gmail
+EMAIL_HOST_PASSWORD = 'cinGGetline998/' ############################################ from work@gmail
 EMAIL_PORT = 587
 
 
