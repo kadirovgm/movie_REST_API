@@ -2,6 +2,7 @@ from django.db import models
 from rest_framework import generics, permissions, viewsets
 from django_filters.rest_framework import DjangoFilterBackend
 import logging
+import json, datetime
 
 from .models import Movie, Actor, Review
 from .serializers import (
@@ -15,9 +16,10 @@ from .serializers import (
 from .service import get_client_ip, MovieFilter, PaginationMovies
 from .permissions import IsOwnerOrReadOnly
 
-###Experiment logging
-import logging
-logger = logging.getLogger(__name__)
+
+from django.http import HttpResponse
+from django.template import loader
+from django.views.decorators.csrf import csrf_exempt
 
 
 class MovieViewSet(viewsets.ReadOnlyModelViewSet):
@@ -69,6 +71,34 @@ class ActorsViewSet(viewsets.ReadOnlyModelViewSet):
         elif self.action == "retrieve":
             return ActorDetailSerializer
 
+
+###logging
+@csrf_exempt
+def save_client_log(request):
+  """
+  Сохраняет собранные данные с клиента в лог
+  """
+  logs = request.POST.get('logs', '[]')
+  with open('request.log', 'a') as f:
+     for log_str in json.loads(logs):
+         f.write(json.dumps(log_str) + '\n')
+
+  return HttpResponse()
+
+def get_page_with_button(request):
+   """
+   Возвращает страницу с кнопкой
+   """
+   template = loader.get_template('movies/index.html')
+
+   return HttpResponse(template.render({}, request))
+
+
+def get_current_datetime(request):
+   """
+   Возвращает текущую дату и время
+   """
+   return HttpResponse(datetime.datetime.now())
 
 # class MovieListView(generics.ListAPIView):
 #     """Вывод списка фильмов"""

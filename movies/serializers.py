@@ -50,7 +50,7 @@ class ReviewCreateSerializer(serializers.ModelSerializer):
 
 
 class ReviewSerializer(serializers.ModelSerializer):
-    """Вывод отзыво"""
+    """Вывод отзывов"""
     children = RecursiveSerializer(many=True)
 
     class Meta:

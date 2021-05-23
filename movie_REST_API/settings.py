@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'movies.middleware.RequestTimeMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -92,17 +93,27 @@ WSGI_APPLICATION = 'movie_REST_API.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'movie',
+#         'USER': 'postgres',
+#         'PASSWORD': 'admin',
+#         'HOST': 'localhost',
+#         "PORT": '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'movies',
         'NAME': 'movie',
         'USER': 'postgres',
-        'PASSWORD': 'фвьшт',
+        'PASSWORD': 'admin',
         'HOST': 'localhost',
         "PORT": '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -233,7 +244,7 @@ CKEDITOR_CONFIGS = {
 
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = '7851039'
-SOCIAL_AUTH_VK_OAUTH2_SECRET = 'NnV8JMR4MaengXZq54yr' # from VK apps
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'NnV8JMR4MaengXZq54yr' # from VK appsF
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
     'rest_framework_social_oauth2.backends.DjangoOAuth2',

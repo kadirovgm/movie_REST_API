@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <script src="{% static 'xhr_interceptor.js' %}"></script>
+    <script src="{% static 'request_client.js' %}"></script>
+    <script>
+        function getDateTime() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("datetime").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "{% url 'current_datetime' %}", true);
+            xhttp.send();
+        }
+    </script>
+    <script>
+        startLogging("{% url 'save_client_log' %}");
+    </script>
+
+    <title>Title</title>
+</head>
+<body>
+
+<button type="button" onclick="getDateTime()">Запросить дату и время</button>
+
+<div id="datetime">
+
+</div>
+
+</body>
+</html>

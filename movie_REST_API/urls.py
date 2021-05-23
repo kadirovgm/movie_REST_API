@@ -29,11 +29,6 @@ urlpatterns = [
     path('auth/', include('djoser.urls.jwt')),
     path('api/v1/', include('movies.urls')),
 ]
-
-
-
 urlpatterns += doc_urls
-
-
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

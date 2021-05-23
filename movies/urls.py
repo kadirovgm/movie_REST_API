@@ -14,6 +14,11 @@ urlpatterns = format_suffix_patterns([
     path("rating/", views.AddStarRatingViewSet.as_view({'post': 'create'})),
     path('actor/', views.ActorsViewSet.as_view({'get': 'list'})),
     path('actor/<int:pk>/', views.ActorsViewSet.as_view({'get': 'retrieve'})),
+
+    #logging testing
+    path('test_logging/', views.get_page_with_button, name='page_with_button'),
+    path('test_logging/current-datetime/', views.get_current_datetime, name='current_datetime'),
+    path('test_logging/save-client-log/', views.save_client_log, name='save_client_log'),
 ])
 
 #
