@@ -1,6 +1,7 @@
 from django.db import models
 from rest_framework import generics, permissions, viewsets
 from django_filters.rest_framework import DjangoFilterBackend
+import logging
 
 from .models import Movie, Actor, Review
 from .serializers import (
@@ -12,6 +13,11 @@ from .serializers import (
     ActorDetailSerializer,
 )
 from .service import get_client_ip, MovieFilter, PaginationMovies
+from .permissions import IsOwnerOrReadOnly
+
+###Experiment logging
+import logging
+logger = logging.getLogger(__name__)
 
 
 class MovieViewSet(viewsets.ReadOnlyModelViewSet):
@@ -19,6 +25,7 @@ class MovieViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = MovieFilter
     pagination_class = PaginationMovies
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly] # ограничения
 
     def get_queryset(self):
         movies = Movie.objects.filter(draft=False).annotate(
@@ -38,11 +45,13 @@ class MovieViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ReviewCreateViewSet(viewsets.ModelViewSet):
     """Добавление отзыва к фильму"""
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = ReviewCreateSerializer
 
 
 class AddStarRatingViewSet(viewsets.ModelViewSet):
     """Добавление рейтинга фильму"""
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = CreateRatingSerializer
 
     def perform_create(self, serializer):
@@ -51,6 +60,7 @@ class AddStarRatingViewSet(viewsets.ModelViewSet):
 
 class ActorsViewSet(viewsets.ReadOnlyModelViewSet):
     """Вывод актеров или режиссеров"""
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Actor.objects.all()
 
     def get_serializer_class(self):

@@ -97,7 +97,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'movie',
         'USER': 'postgres',
-        'PASSWORD': 'admin',
+        'PASSWORD': 'фвьшт',
         'HOST': 'localhost',
         "PORT": '5432',
     }
@@ -168,7 +168,7 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_CONFIGS = {
     'default': {
         # 'skin': 'moono',
-        # 'skin': 'office2013',
+        # 'skin': 'office2020',
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']
         ],
@@ -233,8 +233,7 @@ CKEDITOR_CONFIGS = {
 
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = '7851039'
-SOCIAL_AUTH_VK_OAUTH2_SECRET = 'NnV8JMR4MaengXZq54yr' ############################################## from VK app
-
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'NnV8JMR4MaengXZq54yr' # from VK apps
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
     'rest_framework_social_oauth2.backends.DjangoOAuth2',
@@ -262,7 +261,7 @@ REST_FRAMEWORK = {
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'kadirovgm.work@gmail.com'
-EMAIL_HOST_PASSWORD = 'cinGGetline998/' ############################################ from work@gmail
+EMAIL_HOST_PASSWORD = 'cinGGetline998/'
 EMAIL_PORT = 587
 
 
@@ -270,7 +269,7 @@ DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
     'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': True,
+    'SEND_ACTIVATION_EMAIL': True,#
     'SERIALIZERS': {},
 }
 
@@ -300,4 +299,11 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': BASE_DIR / 'django_cache',
+    }
 }
