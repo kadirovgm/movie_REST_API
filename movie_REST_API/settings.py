@@ -98,7 +98,7 @@ WSGI_APPLICATION = 'movie_REST_API.wsgi.application'
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #         'NAME': 'movie',
 #         'USER': 'postgres',
-#         'PASSWORD': 'admin',
+#         'PASSWORD': 'фвьшт',
 #         'HOST': 'localhost',
 #         "PORT": '5432',
 #     }
@@ -109,7 +109,7 @@ DATABASES = {
         'ENGINE': 'movies',
         'NAME': 'movie',
         'USER': 'postgres',
-        'PASSWORD': 'admin',
+        'PASSWORD': 'фвьшт',
         'HOST': 'localhost',
         "PORT": '5432',
     }
