@@ -27,7 +27,7 @@ class MovieViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = MovieFilter
     pagination_class = PaginationMovies
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly] # ограничения
+    # permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly] # ограничения
 
     def get_queryset(self):
         movies = Movie.objects.filter(draft=False).annotate(
@@ -53,7 +53,7 @@ class ReviewCreateViewSet(viewsets.ModelViewSet):
 
 class AddStarRatingViewSet(viewsets.ModelViewSet):
     """Добавление рейтинга фильму"""
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
     serializer_class = CreateRatingSerializer
 
     def perform_create(self, serializer):

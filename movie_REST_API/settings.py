@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from datetime import timedelta
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,13 +55,15 @@ INSTALLED_APPS = [
     'drf_yasg',
     'movies',
 
+    'argon2',
+
 ]
 
 MIDDLEWARE = [
-    'movies.middleware.RequestTimeMiddleware',
+    # 'movies.middleware.RequestTimeMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -93,27 +97,27 @@ WSGI_APPLICATION = 'movie_REST_API.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'movie',
-#         'USER': 'postgres',
-#         'PASSWORD': 'фвьшт',
-#         'HOST': 'localhost',
-#         "PORT": '5432',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'movies',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'movie',
         'USER': 'postgres',
-        'PASSWORD': 'фвьшт',
+        'PASSWORD': 'admin',
         'HOST': 'localhost',
         "PORT": '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'movies',
+#         'NAME': 'movie',
+#         'USER': 'postgres',
+#         'PASSWORD': 'admin',
+#         'HOST': 'localhost',
+#         "PORT": '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -318,3 +322,10 @@ CACHES = {
         'LOCATION': BASE_DIR / 'django_cache',
     }
 }
+
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+]
